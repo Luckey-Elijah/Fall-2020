@@ -71,10 +71,12 @@ def test():
 def print_how_to_use():
     print('Run the test cases:')
     print('\t' + sys.argv[0] + ' test')
-    print('\nUse your own message. Default key is \'luckey\'.')
+    print('\nUse your own message (default key is \'luckey\'):')
     print('\t' + sys.argv[0] + ' message')
-    print('\nUse your own message and key.')
+    print('\nUse your own message and key:')
     print('\t' + sys.argv[0] + ' message key')
+    print('\nPrint this message:')
+    print('\t' + sys.argv[0])
 
 
 if __name__ == "__main__":
