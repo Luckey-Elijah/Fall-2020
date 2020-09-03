@@ -5,11 +5,42 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: Current File",
+            "name": "Python: No Arg",
             "type": "python",
             "request": "launch",
-            "program": "Project-1-Code-Luckey-Elijah.py",
-            "console": "integratedTerminal"
-        }
+            "program": "Project-1-Code--Luckey-Elijah.py",
+            "console": "integratedTerminal",
+        },
+        {
+            "name": "Python: Test",
+            "type": "python",
+            "request": "launch",
+            "program": "Project-1-Code--Luckey-Elijah.py",
+            "console": "integratedTerminal",
+            "args": [
+                "test"
+            ]
+        },
+        {
+            "name": "Python: Message",
+            "type": "python",
+            "request": "launch",
+            "program": "Project-1-Code--Luckey-Elijah.py",
+            "console": "integratedTerminal",
+            "args": [
+                "thisisthemessage"
+            ]
+        },
+        {
+            "name": "Python: Message & Key",
+            "type": "python",
+            "request": "launch",
+            "program": "Project-1-Code--Luckey-Elijah.py",
+            "console": "integratedTerminal",
+            "args": [
+                "thisisthemessage",
+                "key"
+            ]
+        },
     ]
 }

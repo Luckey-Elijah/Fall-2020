@@ -1,3 +1,4 @@
+import sys
 
 alphabet_to_val = {'a':  0, 'b':  1, 'c':  2, 'd':  3, 'e':  4, 'f':  5, 'g':  6, 'h':  7, 'i':  8, 'j':  9, 'k': 10, 'l': 11,
                    'm': 12, 'n': 13, 'o': 14, 'p': 15, 'q': 16, 'r': 17, 's': 18, 't': 19, 'u': 20, 'v': 21, 'w': 22, 'x': 23, 'y': 24, 'z': 25}
@@ -59,9 +60,43 @@ def encrypt(plaintext, key):
     return cipher
 
 
-if __name__ == "__main__":
+def test():
     # Driver code
     for test in test_cases:
         message = test.lower()
         cipher = encrypt(message, 'elijah')
         print(message.upper() + ": " + cipher.upper())
+
+
+def print_how_to_use():
+    print('Run the test cases:')
+    print('\t' + sys.argv[0] + ' test')
+    print('\nUse your own message. Default key is \'luckey\'.')
+    print('\t' + sys.argv[0] + ' message')
+    print('\nUse your own message and key.')
+    print('\t' + sys.argv[0] + ' message key')
+
+
+if __name__ == "__main__":
+    num_arg = len(sys.argv) - 1
+
+    if (num_arg == 0):
+        # no arguments given, user needs help
+        print_how_to_use()
+
+    elif(num_arg == 1 and sys.argv[1] == 'test'):
+        # User wants test cases
+        test()
+
+    elif(num_arg == 1):
+        # User is passing in only a message, using default key
+        cipher = encrypt(sys.argv[1], 'luckey')
+        print(cipher)
+
+    elif(num_arg == 2):
+        # User is passing in their own message and key
+        cipher = encrypt(sys.argv[1], sys.argv[2])
+        print(cipher)
+
+    else:
+        print_how_to_use()
