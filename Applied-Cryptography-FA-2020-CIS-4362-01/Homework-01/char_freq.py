@@ -32,8 +32,11 @@ test = "UZQSOVUOHXMOPVGPOZPEVSGZWSZOPFPESXUDBMETSXAIZ" + \
     "EPYEPOPDZSZUFPOMBZWPFUPZHMDJUDTMOHMQ"
 
 
-if __name__ == "__main__":
-    string = test
+def count_letters(string):
+    '''
+    Counts the occurrences of each character in the string.
+    Returns the result as an unsorted map.
+    '''
     freq_map = {}
     for letter in string:
         if letter in freq_map:
@@ -41,9 +44,25 @@ if __name__ == "__main__":
             freq_map[letter] += 1
         else:
             freq_map[letter] = 1
+    return freq_map
 
-    print('P: ', freq_map['P'])
-    print('Z: ', freq_map['Z'])
-    print('S: ', freq_map['S'])
-    print('W: ', freq_map['W'])
-    print(freq_map)
+
+def map_to_freq(letter_map, string_length):
+    '''
+    Takes a letter map {(letter, count)} and
+    '''
+    # Orders the list
+    letter_map = {k: v for k, v in sorted(
+        letter_map.items(), key=lambda item: item[1], reverse=True)}
+
+    # prints the list
+    for letter in letter_map:
+        # calculates the frequency
+        freq = round(letter_map[letter] / string_length * 100, 2)
+        print('%c: %5.2f (%d)' % (letter, freq, letter_map[letter]))
+
+
+if __name__ == "__main__":
+    string = test
+    freq_map = count_letters(string)
+    map_to_freq(freq_map, len(string))
