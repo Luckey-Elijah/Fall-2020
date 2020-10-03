@@ -2,16 +2,14 @@ import requests
 
 
 def make_request(url):
-    response = requests.get(url)
-    response_code = response
-    response_body = response.text
-    return response_code, response_body
+    response = requests.get(url, headers={"User-Agent": "XY"})
+    return response.status_code, response.text
 
 
-class OnlineResource():
+class OnlineText():
     """
-    Class used to fetch a remote text file for testing.
+    Class used to fetch a remote text file for testing and more analysis. Uses the `requests` library.
     """
 
     def __init__(self, url):
-        self.code, self.text = make_request(url)
+        self.status_code, self.text = make_request(url)
