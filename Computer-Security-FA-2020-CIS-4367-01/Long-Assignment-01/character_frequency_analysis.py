@@ -1,4 +1,4 @@
-from text_request import OnlineText
+from text_request import OnlineTextResource
 import re
 
 
@@ -88,8 +88,8 @@ class CharacterFrequencyAnalyzer():
 
 
 if __name__ == "__main__":
-    online_resource = OnlineText(
-        "https://www.gutenberg.org/files/100/100-0.txt")
+    online_resource = OnlineTextResource(
+        "https://www.astrolog.org/labyrnth/novel.txt")
 
     if online_resource.status_code == 200:
         freq_analysis = CharacterFrequencyAnalyzer(online_resource.text)
@@ -97,3 +97,4 @@ if __name__ == "__main__":
         print(freq_analysis.length)
     else:
         print("Server response is not good.")
+        print("Status Code: {0}".format(online_resource.status_code))

@@ -2,11 +2,11 @@ import requests
 
 
 def make_request(url):
-    response = requests.get(url, headers={"User-Agent": "XY"})
+    response = requests.get(url, headers={"User-Agent": ""})
     return response.status_code, response.text
 
 
-class OnlineText():
+class OnlineTextResource():
     """
     Class used to fetch a remote text file for testing and more analysis. Uses the `requests` library.
     """
