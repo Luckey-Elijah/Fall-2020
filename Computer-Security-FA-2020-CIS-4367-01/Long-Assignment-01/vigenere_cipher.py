@@ -21,6 +21,7 @@ def encrypt_letter(char, key):
     k = ord(key)
     e = (p + k) % 26
 
+    # TODO: Test evaluations
     while e < 65:
         e = e + 26
     while e > 122:
