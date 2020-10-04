@@ -1,4 +1,3 @@
-from text_request import OnlineTextResource
 import re
 
 
@@ -17,7 +16,7 @@ def __check_unicode(char) -> (bool, chr):
     return False, None
 
 
-def count_letter_frequency(string, desc=True, include_spaces=False, alphanum_only=True) -> dict:
+def create_frequency_map(string, desc=True, include_spaces=False, alphanum_only=True) -> dict:
     '''
     Counts the occurrences of each character in the string.
     Returns the result as an unsorted map.
@@ -50,7 +49,7 @@ class CharacterFrequencyAnalyzer():
 
         self.text = re.sub(r'\W+', '', source_string)
         self.length = len(self.text)
-        self.map = count_letter_frequency(self.text)
+        self.map = create_frequency_map(self.text)
 
     def print_frequency(self):
         """
@@ -85,16 +84,3 @@ class CharacterFrequencyAnalyzer():
             print(str_format.format(letter, count, freq))
 
         print(h_line)
-
-
-if __name__ == "__main__":
-    online_resource = OnlineTextResource(
-        "https://www.astrolog.org/labyrnth/novel.txt")
-
-    if online_resource.status_code == 200:
-        freq_analysis = CharacterFrequencyAnalyzer(online_resource.text)
-        freq_analysis.print_frequency()
-        print(freq_analysis.length)
-    else:
-        print("Server response is not good.")
-        print("Status Code: {0}".format(online_resource.status_code))
