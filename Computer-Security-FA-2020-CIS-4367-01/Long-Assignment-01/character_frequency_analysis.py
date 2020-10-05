@@ -1,29 +1,34 @@
 import re
 
 
-def __check_unicode(char) -> (bool, chr):
+def __check_unicode(char, alpha_only) -> (bool, chr):
     '''
-    Checks is char is in range of [a-zA-Z] and returns uppercase [char, True].
-    Otherwise it returns [None, False].
+    `alpha_only = True`: Checks is char is in range of [`a-zA-Z`] and returns uppercase [`char`, `True`].\n
+    `alpha_only = False`: Includes all other unicode characters.\n
+    Otherwise it returns [`None`, `False`].
     '''
     unicode = ord(char)
+
     # [A-Z] codes
     if unicode >= 65 and unicode <= 90:
         return True, char
     # [a-z] codes
-    if unicode >= 97 and unicode <= 122:
+    elif unicode >= 97 and unicode <= 122:
         return True, char.upper()
-    return False, None
+    elif alpha_only:
+        return False, None
+    else:
+        return True, char.upper()
 
 
-def create_frequency_map(string, desc=True, include_spaces=False, alphanum_only=True) -> dict:
+def create_frequency_map(string, desc=True, include_spaces=False, alpha_only=True) -> dict:
     '''
     Counts the occurrences of each character in the string.
     Returns the result as an unsorted map.
     '''
     letter_map = {}
     for character in string:
-        is_char_alpha, character = __check_unicode(character)
+        is_char_alpha, character = __check_unicode(character, alpha_only)
         if is_char_alpha:
             if character in letter_map:
                 # increment the count by one
@@ -45,7 +50,12 @@ def create_frequency_map(string, desc=True, include_spaces=False, alphanum_only=
 
 
 class CharacterFrequencyAnalyzer():
-    def __init__(self, source_string, include_spaces=False, alphanum_only=True):
+    """
+    Used to analyze the characters of a given text.
+    Currently only supports alpha-numeric characters.
+    """
+
+    def __init__(self, source_string):
 
         self.text = re.sub(r'\W+', '', source_string)
         self.length = len(self.text)
@@ -60,8 +70,6 @@ class CharacterFrequencyAnalyzer():
         +--------+-----------+--------+
         |      E |   8.36    | 481973 |
         |      T |   6.14    | 354387 |
-        |      O |   5.77    | 333041 |
-        |      A |   5.38    | 310094 |
         |   ect. |   X.XX    | ...... |
         |   .... |   ....    | ...... |
         ```
