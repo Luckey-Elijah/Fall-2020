@@ -1,3 +1,4 @@
 *.pyc
 .vscode
 example_literature/
+__pycache__
