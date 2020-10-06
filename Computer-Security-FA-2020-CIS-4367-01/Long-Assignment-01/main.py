@@ -1,10 +1,11 @@
+# !/usr/bin/python3
+
+from vigenere_cipher import VigenereCipher
+from text import TextResource
+from character_frequency_analysis import CharacterFrequencyAnalyzer
 import sys
 
 assert sys.version_info >= (3, 6, 0), "Python version too low."
-
-from character_frequency_analysis import CharacterFrequencyAnalyzer
-from text import TextResource
-from vigenere_cipher import VigenereCipher
 
 
 if __name__ == "__main__":\
