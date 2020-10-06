@@ -1,12 +1,13 @@
 import re
-from vigenere_cipher import remove_non_alpha
+from vigenere_cipher import remove_not_in_alphabet
 
 
-def _create_frequency_map(string, desc=True, include_spaces=False, alpha_only=True) -> dict:
+def _create_frequency_map(string, desc=True) -> dict:
     '''
     Counts the occurrences of each character in the string.
     Returns the result as an unsorted map.
     '''
+
     letter_map = {}
     for character in string:
         if character in letter_map:
@@ -41,7 +42,8 @@ class CharacterFrequencyAnalyzer():
 
     def __init__(self, source_string, alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
 
-        self.text = remove_non_alpha(source_string.upper(), alphabet=alphabet)
+        self.text = remove_not_in_alphabet(
+            source_string.upper(), alphabet=alphabet)
         self.length = len(self.text)
         self.map = _create_frequency_map(self.text)
 
@@ -65,13 +67,13 @@ class CharacterFrequencyAnalyzer():
         print(h_line)
 
         # prints the list
-        for letter in self.map:
+        for character in self.map:
 
             # letter count
-            count = self.map[letter]
+            count = self.map[character]
 
             # this index freq
             freq = round(count / self.length * 100, 2)
-            print(str_format.format(letter, count, freq))
+            print(str_format.format(character, count, freq))
 
         print(h_line)

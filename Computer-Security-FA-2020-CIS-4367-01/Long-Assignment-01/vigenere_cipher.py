@@ -60,7 +60,7 @@ def _decrypt_letter(char, key, alphabet) -> str:
     return chr(p)
 
 
-def remove_non_alpha(text, alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
+def remove_not_in_alphabet(text, alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
     """
     Removes non-alphabetic characters (including whitespace). [`a-zA-Z`].
     """
@@ -151,7 +151,7 @@ class VigenereCipher():
 
         cipher_text = ""
         full_key = self._gen_full_key()
-        plaintext = remove_non_alpha(self.plaintext.upper())
+        plaintext = remove_not_in_alphabet(self.plaintext.upper())
 
         for char_index in range(len(plaintext)):
 
