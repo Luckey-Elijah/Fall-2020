@@ -1,41 +1,20 @@
 import re
+from vigenere_cipher import remove_non_alpha
 
 
-def __check_unicode(char, alpha_only) -> (bool, chr):
-    '''
-    `alpha_only = True`: Checks is char is in range of [`a-zA-Z`] and returns uppercase [`char`, `True`].\n
-    `alpha_only = False`: Includes all other unicode characters.\n
-    Otherwise it returns [`None`, `False`].
-    '''
-    unicode = ord(char)
-
-    # [A-Z] codes
-    if unicode >= 65 and unicode <= 90:
-        return True, char
-    # [a-z] codes
-    elif unicode >= 97 and unicode <= 122:
-        return True, char.upper()
-    elif alpha_only:
-        return False, None
-    else:
-        return True, char.upper()
-
-
-def create_frequency_map(string, desc=True, include_spaces=False, alpha_only=True) -> dict:
+def _create_frequency_map(string, desc=True, include_spaces=False, alpha_only=True) -> dict:
     '''
     Counts the occurrences of each character in the string.
     Returns the result as an unsorted map.
     '''
     letter_map = {}
     for character in string:
-        is_char_alpha, character = __check_unicode(character, alpha_only)
-        if is_char_alpha:
-            if character in letter_map:
-                # increment the count by one
-                letter_map[character] += 1
-            else:
-                # adds the new character to the map
-                letter_map[character] = 1
+        if character in letter_map:
+            # increment the count by one
+            letter_map[character] += 1
+        else:
+            # adds the new character to the map
+            letter_map[character] = 1
 
     # Sorts the dictionary
     letter_map = {
@@ -51,27 +30,31 @@ def create_frequency_map(string, desc=True, include_spaces=False, alpha_only=Tru
 
 class CharacterFrequencyAnalyzer():
     """
-    Used to analyze the characters of a given text.
-    Currently only supports alpha-numeric characters.
+    Used to analyze the characters of a given text based on an alphabet.\n
+    Usage:\n
+    ```python
+    >>> s = "This is the source string ... exclamation mark!"
+    >>> x = CharacterFrequencyAnalyzer(s, alphabet="A]{DEFGHI.KLMNO-QRSTUV!XYZ")
+    >>> print
+    ```
     """
 
-    def __init__(self, source_string):
+    def __init__(self, source_string, alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
 
-        self.text = re.sub(r'\W+', '', source_string)
+        self.text = remove_non_alpha(source_string.upper(), alphabet=alphabet)
         self.length = len(self.text)
-        self.map = create_frequency_map(self.text)
+        self.map = _create_frequency_map(self.text)
 
     def print_frequency(self):
         """
         Prints a table in this style: \n
         ```txt
-        +--------+-----------+--------+
-        | letter | frequency | counts |
-        +--------+-----------+--------+
-        |      E |   8.36    | 481973 |
-        |      T |   6.14    | 354387 |
-        |   ect. |   X.XX    | ...... |
-        |   .... |   ....    | ...... |
+        +--------+--------+-----------+
+        | LETTER | COUNTS | FREQUENCY |
+        +--------+--------+-----------+
+        |      S |      6 |   9.09    |
+        |      B |      6 |   9.09    |
+        |   .... |   .... | ......... |
         ```
         """
 
