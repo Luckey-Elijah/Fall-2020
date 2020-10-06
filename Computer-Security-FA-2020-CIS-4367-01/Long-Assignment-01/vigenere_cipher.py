@@ -60,7 +60,7 @@ def _decrypt_letter(char, key, alphabet) -> str:
     return chr(p)
 
 
-def _remove_non_alpha(text):
+def remove_non_alpha(text, alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
     """
     Removes non-alphabetic characters (including whitespace). [`a-zA-Z`].
     """
@@ -70,7 +70,7 @@ def _remove_non_alpha(text):
 
     trimmed_text = ""
     for letter in text:
-        if letter.isalpha():
+        if letter in alphabet:
             trimmed_text = trimmed_text + letter
 
     return trimmed_text
@@ -151,7 +151,7 @@ class VigenereCipher():
 
         cipher_text = ""
         full_key = self._gen_full_key()
-        plaintext = _remove_non_alpha(self.plaintext.upper())
+        plaintext = remove_non_alpha(self.plaintext.upper())
 
         for char_index in range(len(plaintext)):
 
@@ -198,18 +198,3 @@ class VigenereCipher():
             self.plaintext = plaintext_str
 
         return plaintext_str
-
-
-if __name__ == "__main__":
-    # Test 1: Create cipher. Encrypt. Then decrypt back.
-
-    a = "3WLE4I9F,XGBDMUNR8.VT˚57YH"  # custom alphabet
-
-    plaintext = "my name is elijah, and I do not enjoy doing this. 1234567890"
-    v_1 = VigenereCipher("elijah", plaintext=plaintext, alphabet=a)
-    v_1.encrypt()  # CIPHER = 5NWA.8.S.3UJAYALX˚MOWOH87JOMXO.4T,M˚S
-
-    c_text = "5NWA.8.S.3UJAYALX˚MOWOH87JOMXO.4T,M˚S"
-
-    v_2 = VigenereCipher("elijah", cipher_text=c_text, alphabet=a)
-    v_2.decrypt(update_plaintext=True)  # MYNAMEISELIJAHANDIDONOTENJOYDOINGTHIS
