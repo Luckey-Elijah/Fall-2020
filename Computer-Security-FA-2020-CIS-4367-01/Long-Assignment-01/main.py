@@ -8,15 +8,22 @@ import sys
 assert sys.version_info >= (3, 6, 0), "Python version too low."
 
 
-if __name__ == "__main__":\
+if __name__ == "__main__":
+    # This README file
+    resource = TextResource("./README.md", online_resource=False)
 
-    v = VigenereCipher(
-        "elijah", plaintext="Used to perform vigenere encryption, vigenere decryption, and analysis on text.")
-    v.encrypt()
-    # resource = TextResource("example_literature/shakespeare.txt")
-    freq_analysis_c = CharacterFrequencyAnalyzer(v.cipher_text)
-    freq_analysis_p = CharacterFrequencyAnalyzer(v.plaintext)
-    freq_analysis_c.print_frequency()
-    freq_analysis_p.print_frequency()
-    print(v.cipher_text)
-    print(v.plaintext)
+    # Create the VigenereCipher object
+    vigenere_cipher = VigenereCipher("newkey", plaintext=resource.text)
+
+    # Setting the text the CharacterFrequencyAnalyzer will use
+    analyzer = CharacterFrequencyAnalyzer(vigenere_cipher.plaintext)
+
+    # Print the analysis
+    analyzer.print_frequency()
+
+    # Generate a cipher text and use a new cipher analyzer
+    cipher_text_analyzer = CharacterFrequencyAnalyzer(
+        vigenere_cipher.encrypt())
+
+    # Analysis of the cipher text/encrypted message
+    cipher_text_analyzer.print_frequency()
