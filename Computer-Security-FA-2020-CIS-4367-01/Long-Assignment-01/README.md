@@ -2,8 +2,6 @@
 
 ## Usage
 
-Run:
-
 ```shell
 python3 main.py
 ```
@@ -38,7 +36,7 @@ Otherwise you can access a local resource by providing the path to it.
 
 ```python
 resource = TextResource("./README.md")
-
+print(resource.text)
 ```
 
 Result:
@@ -81,6 +79,16 @@ print("CIPHER  : {}".format(v.encrypt()))
 print("DECRYPT : {}\n".format(v.decrypt()))
 ```
 
+Result of English alphabet (A-Z):
+
+```txt
+ALPHABET: ABCDEFGHIJKLMNOPQRSTUVWXYZ
+CIPHER  : NCGTDSIOTVYVFFKWORXBGUXGKIRJSSGSVTYILXVHOXTSPDYRTVRXKGAKTQMXXBU
+DECRYPT : USEDTOPERFORMVIGENEREENCRYPTIONITDOESNTRETAINNONALPHACHARACTERS
+```
+
+Now with a new `alphabet`.
+
 ```python
 # A new alphabet is introduced.
 v.alphabet = "SUZC7^1NJB%XY35MIE64LO.DVF"
@@ -88,14 +96,6 @@ v.alphabet = "SUZC7^1NJB%XY35MIE64LO.DVF"
 print("ALPHABET: {}".format(v.alphabet))
 print("CIPHER  : {}".format(v.encrypt()))
 print("DECRYPT : {}".format(v.decrypt()))
-```
-
-Result of English alphabet (A-Z):
-
-```txt
-ALPHABET: ABCDEFGHIJKLMNOPQRSTUVWXYZ
-CIPHER  : NCGTDSIOTVYVFFKWORXBGUXGKIRJSSGSVTYILXVHOXTSPDYRTVRXKGAKTQMXXBU
-DECRYPT : USEDTOPERFORMVIGENEREENCRYPTIONITDOESNTRETAINNONALPHACHARACTERS
 ```
 
 Result of custom alphabet (`SUZC7^1NJB%XY35MIE64LO.DVF`):
