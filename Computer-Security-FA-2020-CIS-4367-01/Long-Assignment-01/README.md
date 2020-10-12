@@ -1,5 +1,7 @@
 # A Simple Vigenere Cipher and Symbol Analyzer
 
+**Code and development moved to [`Luckey-Elijah/Vigenere-Symbol-Analysis` repository](https://github.com/Luckey-Elijah/Vigenere-Symbol-Analysis)**
+
 ## Usage
 
 ```shell
