@@ -1,11 +1,16 @@
+ASCII = "ASCII"
+UTF_8 = "utf-8"
+HEX = "hex"
+LATIN_1 = 'latin-1'
 
+# FREQ_WORDS = ["the"]
 FREQ_WORDS = [
     "the", "of", "and", "a", "to", "in", "is", "be", "that", "was", "he",
     "for", "it", "with", "as", "his", "I", "on", "have", "at", "by", "not",
-    "they", "this", ""
+    "they", "this", "had", "are", "but", "from", "or", "she"
 ]
 
-tests = [
+TESTS = [
     "866e786a0042d4abf21e305c35ad65c1b542bbbe8f55b3848032c6359fc3e2e96b21421196a107c90195a30896bc61f54906abae35fd196fb1519b2d1206320b892b7c7719e60e37b697738c0776292a9c5d132ac66a8bd1a728bb5882e629",
     "9c647079135f94eef80265133bec67ccf006b3bc8944a69d84228f2296cae2e962364a069ba111c91188e34ccfb27af5400bbaa467f20469b50ed33c1e436601897869240be30e36a99b6990442561249e5d1327c170d8dce638f35f83a866f9ca08b8f05f0123856491c68b56b91dad9d6b2c4a6315238b2316c88b51c7fbbcd50f9ee7fbc66ccad06febb77070e92c3eb292befb613250bf2c69a3e40a3410959a14630e9d5219e780828c81ca1d766cc0f811",
     "9d64746a044fd8e0ee08651f2fb563d0fa41acbc8d44bad08833922998c2b1bd6f3e55188df853cd5992e44688bf71f54a02a4eb73f40221ba4d8720564328009e726d7003e00779ba9c79d84d3322379548473ac67185",
@@ -18,53 +23,90 @@ tests = [
     "8968617d0f1b97e5ee51280f3aec72caf106bdb48d44a68291339e35db86b6f56f2140548bf253cd1593e8498baa34ba4f02fda070e25075b04387681b473610cc7f75614ae21a3efb8672d85d3e2031cc5b5a23c17ad9cda334ef10",
 ]
 
-target = "8f6f3779154f99e8e014375c34a267c1e745bbad895fe391c526873383cfa1e86632575481e803c41c93f94d97a738f54d02a9ec66bb1360b44ed3210206254fcc627b240bfb1d38b899788a093d2f2a9b4b1327c17edf99b224fe1e9ee66effc649a3b5430c7c9a2a91d7c51bab14e9d57d39566a5634c4340c858c5a93fff89e0394f3f49369ce9c6ee6f26b29a82e29fb9ca0a8657c48ad2c60eaf70a6b44918a40630392171ca29b87cd9e9e037c6ad2bc4be08c61ba6223a8bac0a024741b71b270a0579ab1d0308ce9b54b391a6a49ebacfc5eb5b57dd56caf0b1694544cfa6e"
+TARGET = "8f6f3779154f99e8e014375c34a267c1e745bbad895fe391c526873383cfa1e86632575481e803c41c93f94d97a738f54d02a9ec66bb1360b44ed3210206254fcc627b240bfb1d38b899788a093d2f2a9b4b1327c17edf99b224fe1e9ee66effc649a3b5430c7c9a2a91d7c51bab14e9d57d39566a5634c4340c858c5a93fff89e0394f3f49369ce9c6ee6f26b29a82e29fb9ca0a8657c48ad2c60eaf70a6b44918a40630392171ca29b87cd9e9e037c6ad2bc4be08c61ba6223a8bac0a024741b71b270a0579ab1d0308ce9b54b391a6a49ebacfc5eb5b57dd56caf0b1694544cfa6e"
 
 
-def char_xor(a: str, b: str) -> int:
-    """
-    Returns XOR of two characters. Raises exception when `len(a)` or `len(a)`
-    is not 1.
-    """
-
-    # Assert character. Raise error on fail assertion with message.
-    if len(a) != 1:
-        raise AssertionError("{} is not length 1.".format(a))
-    elif len(b) != 1:
-        raise AssertionError("{} is not length 1.".format(b))
-
-    return ord(a) ^ ord(b)
-
-
-def string_xor(cipher: str, crib: str):
+def string_xor(a: str, b: str) -> hex:
     """
     Performs XOR of two full length strings.
+    Assuming the strings are base-16.
     """
 
     # String lengths
-    ciph_len: int = len(cipher)
-    crib_len: int = len(crib)
+    a_len: int = len(a)
+    b_len: int = len(b)
 
-    if ciph_len < 1 or crib_len < 1:
+    # Assertion
+    if a_len < 1 or b_len < 1:
         raise AssertionError("Length is less than 1.")
 
-    results = ""
+    if a_len > b_len:
+        # slice a
+        a = a[0:b_len]
+        a_len = len(a)
+    elif b_len > a_len:
+        # slice b
+        b = b[0:a_len]
+        b_len = len(b)
 
-    if ciph_len > crib_len:
-        for i in range(len(crib)):
-            l = chr(char_xor(crib[i], cipher[i]))
-            results = results + l
-    else:
-        for i in range(len(cipher)):
-            l = chr(char_xor(crib[i], cipher[i]))
-            results = results + l
-
-    return results
+    return hex(int(a, base=16) ^ int(b, base=16))
 
 
 if __name__ == "__main__":
 
+    xored_list = []
+
     # xor each case against each other
-    for i in range(len(tests)):
+    for i in range(len(TESTS)):
         for j in range(i):
-            s = string_xor(tests[i], tests[j])
+            x = string_xor(TESTS[i], TESTS[j])
+            x_stripped = x[2:]
+            xored_list.append(x_stripped)
+
+    cribs = []
+
+    # For every xor message, try each of the FREQ_WORDS items for crib dragging
+    for xor_list_i in range(len(xored_list)):
+
+        # pick asimple to crib drag against
+        xor_hex_sample = xored_list[xor_list_i]
+
+        # For all the 30 words in the list, crib drag across the xor sample
+        for word_i in range(len(FREQ_WORDS)):
+
+            # convert the word to hex
+            word_hex_as_str = FREQ_WORDS[word_i].encode(UTF_8).hex()
+
+            crib = ""
+            word_hex_as_str_len = len(word_hex_as_str)
+            iterations = len(xor_hex_sample) - len(word_hex_as_str)
+
+            # populate the crib string
+            for xor_index in range(iterations):
+                xor_slice = xor_hex_sample[xor_index: xor_index +
+                                           word_hex_as_str_len]
+
+                c = string_xor(word_hex_as_str, xor_slice)[2:]
+
+                # add padding to hex
+                if len(c) % 2 != 0:
+                    c = '0' + c
+
+                # Convert c -> ascii
+                byte = bytes.fromhex(c)
+                c_decoded = byte.decode(LATIN_1)
+
+                # add it to the list
+                crib = crib + c_decoded
+
+            # update the cribs
+            cribs.append(crib)
+
+    # Logic: search across the cribs for matches
+    count: int = 0
+    for crib in cribs:
+        for word in FREQ_WORDS:
+            if word in crib:
+                count += 1
+                print("Found match \"{}\"".format(word))
+    print(count)
