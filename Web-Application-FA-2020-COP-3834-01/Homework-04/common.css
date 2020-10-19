@@ -2,18 +2,11 @@
     font-family: 'Space Mono', monospace;
 }
 
-.float-left {
-    width: 50%;
-    float: left;
-}
-
-.float-right {
-    width: 50%;
-    float: right;
-}
-
 .menu-container {
     overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .banner-image {
@@ -84,18 +77,7 @@ form input {
 
 form input:hover {
     background-color: #c2a683;
-    /* brown (picked from coffee in image) */
-}
-
-td {
-    padding-inline: 20px;
-}
-
-table {
-    border: solid black;
-    border-collapse: collapse;
-    margin: 24px;
-    font-size: 16px;
+    /* light-brown (picked from coffee in image) */
 }
 
 table td img {
@@ -105,4 +87,15 @@ table td img {
     overflow: hidden;
     object-fit: cover;
     margin: 12px;
+}
+
+table {
+    border: solid black;
+    border-collapse: collapse;
+    margin: 24px;
+    font-size: 16px;
+}
+
+td {
+    padding-inline: 20px;
 }
