@@ -27,7 +27,7 @@ A new Lakeland cafe called "***The Coffee Den***" is planning to open this winte
       Email: contactus@thecoffeeden.com
       ```
 
-## Page 2 ([`menu.html`](./menu.html)))
+## Page 2 ([`menu.html`](./menu.html))
 
 > The menu has a **table** of the following product catagories, products, proces, and images:
 
