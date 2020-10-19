@@ -18,7 +18,7 @@ A new Lakeland cafe called "***The Coffee Den***" is planning to open this winte
     | Monday - Thursday | 6am to 7pm |
     | Friday            | 6am to 4pm |
     | Saturday          | 9am to 7pm |
-    | Sunday            | 1am to 5pm |
+    | Sunday            | 1pm to 5pm |
 4. Expected contact information:
 
       ```
