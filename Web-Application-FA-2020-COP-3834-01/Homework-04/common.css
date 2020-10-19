@@ -2,11 +2,12 @@
     font-family: 'Space Mono', monospace;
 }
 
-.menu-container {
-    overflow: hidden;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+.banner-text {
+    font-size: 24px;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    color: white;
 }
 
 .banner-image {
@@ -21,24 +22,36 @@
     height: 50%;
 }
 
-.banner-text {
-    font-size: 24px;
-    text-align: center;
-    top: 50%;
-    left: 50%;
-    color: white;
+.home-layout {
+    margin-top: 24px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
 }
 
-.hours-header {
-    font-weight: 900;
-    text-decoration: underline;
+.contact-info {
+    background: #C98F4A;
+    padding: 12px;
+    border-radius: 8px;
 }
 
-.menu-header {
-    text-align: center;
-    font-size: 24px;
+.home-layout h1 {
+    text-align: left;
+}
+
+.menu-layout {
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+th {
     font-weight: 900;
     text-decoration: underline;
+    background-color: white;
 }
 
 footer {
@@ -55,8 +68,13 @@ p a {
     color: black;
 }
 
+p a:hover {
+    color: grey;
+}
+
 h1 {
     margin: 24px;
+    text-align: center;
 }
 
 form {
@@ -64,8 +82,8 @@ form {
 }
 
 form input {
-    background-color: #C98F4A;
     /* brown (picked from coffee in image) */
+    background-color: #C98F4A;
     width: 100px;
     color: white;
     padding: 4px 12px;
@@ -76,8 +94,8 @@ form input {
 }
 
 form input:hover {
-    background-color: #c2a683;
     /* light-brown (picked from coffee in image) */
+    background-color: #c2a683;
 }
 
 table td img {
@@ -89,6 +107,12 @@ table td img {
     margin: 12px;
 }
 
+table td img:hover {
+    position: relative;
+    display: block;
+    height: auto;
+}
+
 table {
     border: solid black;
     border-collapse: collapse;
@@ -98,4 +122,8 @@ table {
 
 td {
     padding-inline: 20px;
+}
+
+tr:hover {
+    background-color: #c2a683;
 }
