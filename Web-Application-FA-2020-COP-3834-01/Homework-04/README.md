@@ -21,7 +21,7 @@ A new Lakeland cafe called "***The Coffee Den***" is planning to open this winte
     | Sunday            | 1pm to 5pm |
 4. Expected contact information:
 
-      ```
+      ```txt
       Address: 411 Coffee Bean Dr. Lakeland, FL 33813
       Telephone: (863) 911-cafe
       Email: contactus@thecoffeeden.com
