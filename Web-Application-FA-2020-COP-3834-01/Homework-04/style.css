@@ -2,14 +2,30 @@
     font-family: 'Space Mono', monospace;
 }
 
+.float-left {
+    width: 50%;
+    float: left;
+}
+
+.float-right {
+    width: 50%;
+    float: right;
+}
+
+.menu-container {
+    overflow: hidden;
+}
+
 .banner-image {
-
     /* Makes the image a bit darker color to make the titel easily read. */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("images/nathan-dumlao-Y3AqmbmtLQI-unsplash.jpg");
-
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1)), url("images/nathan-dumlao-Y3AqmbmtLQI-unsplash.jpg");
+    /* Sets layout properties */
     background-position: center;
     background-size: cover;
-
+    background-repeat: no-repeat;
+    object-fit: cover;
+    border-radius: 0px 0px 24px 24px;
+    height: 50%;
 }
 
 .banner-text {
@@ -18,16 +34,75 @@
     top: 50%;
     left: 50%;
     color: white;
-    text-decoration: ;
 }
 
-button {
-    background-color:#C98F4A; /* brown (picked from coffee in image) */
+.hours-header {
+    font-weight: 900;
+    text-decoration: underline;
+}
 
+.menu-header {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 900;
+    text-decoration: underline;
+}
+
+footer {
+    position: fixed;
+    border-radius: 24px 24px 0px 0px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background-color: #C98F4A;
+}
+
+p a {
+    color: black;
+}
+
+h1 {
+    margin: 24px;
+}
+
+form {
+    display: inline;
+}
+
+form input {
+    background-color: #C98F4A;
+    /* brown (picked from coffee in image) */
+    width: 100px;
     color: white;
     padding: 4px 12px;
     text-align: center;
     font-size: 16px;
     border-radius: 8px;
-    margin: 4px;
+    margin: 24px;
+}
+
+form input:hover {
+    background-color: #c2a683;
+    /* brown (picked from coffee in image) */
+}
+
+td {
+    padding-inline: 20px;
+}
+
+table {
+    border: solid black;
+    border-collapse: collapse;
+    margin: 24px;
+    font-size: 16px;
+}
+
+table td img {
+    border-radius: 8px;
+    height: 80px;
+    width: 240px;
+    overflow: hidden;
+    object-fit: cover;
+    margin: 12px;
 }
