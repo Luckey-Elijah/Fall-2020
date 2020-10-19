@@ -22,7 +22,7 @@
     height: 50%;
 }
 
-.home-layout {
+.home-layout, .order-layout, form div {
     margin-top: 24px;
     overflow: hidden;
     display: flex;
@@ -95,7 +95,7 @@ form input {
 
 form input:hover {
     /* light-brown (picked from coffee in image) */
-    background-color: #c2a683;
+    background-color: #e2d1bb;
 }
 
 table td img {
