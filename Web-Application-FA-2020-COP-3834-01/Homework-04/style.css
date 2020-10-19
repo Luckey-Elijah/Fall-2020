@@ -1,0 +1,33 @@
+* {
+    font-family: 'Space Mono', monospace;
+}
+
+.banner-image {
+
+    /* Makes the image a bit darker color to make the titel easily read. */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("images/nathan-dumlao-Y3AqmbmtLQI-unsplash.jpg");
+
+    background-position: center;
+    background-size: cover;
+
+}
+
+.banner-text {
+    font-size: 24px;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    color: white;
+    text-decoration: ;
+}
+
+button {
+    background-color:#C98F4A; /* brown (picked from coffee in image) */
+
+    color: white;
+    padding: 4px 12px;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 8px;
+    margin: 4px;
+}
