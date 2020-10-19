@@ -54,7 +54,7 @@ A new Lakeland cafe called "***The Coffee Den***" is planning to open this winte
 **Additional CSS and HTML requirements:**
 
 1. Best practices of HTML5 and CSS.
-2. An external CSS file (common.css) that contains the rules for the common elements in the pages, i.e., the navigation bar and the footer. Also, the pages background, format of the page heading, and the page text.
+2. An external CSS file (`common.css`) that contains the rules for the common elements in the pages, i.e., the navigation bar and the footer. Also, the pages background, format of the page heading, and the page text.
 3. Good use of semantic html5 elements.
 4. Use flexbox for layout.
 5. The essential form's controls attributes and values. The method of the form, and the action of the form, the correct form elements, and the labels of the form's controls.
