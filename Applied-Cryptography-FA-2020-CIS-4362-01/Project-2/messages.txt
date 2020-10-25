@@ -1,0 +1,21 @@
+TARGET: Hooray, you have decrypted the target text. you have finished the assignment. hope you had fun.
+
+1. Sometimes it is better to just walk away from things and go back to them later when you are in a better frame of mind.
+
+2. Given one msg and ciphertext, there is already one key that maps the msg to that ciphertext.
+
+3. An attacker intercepts a particular ciphertext, let's call it c, if attacker knows that the initial part of msg happens to be a known value by prior knowledge, attacker will know the prefix of the pseudo random random sequence.
+
+4. This course introduces cryptographic primitives and how they are implemented in applications. Topics covered include: symmetric-key encryption algorithms, public key encryption, digital signatures, and message integrity.
+
+5. Diffie and hellman introduced the concept of public key cryptography. the mathematical "trick" of diffie-hellman key exchange is that it is relatively easy to compute exponents compared to computing discrete logarithms.
+
+6. The mainstream cryptographic community has long held that DES's 56-bit key was too short to withstand a brute-force attack from modern computers. Remember Moore's Law: computer power doubles every 18 months. Given that increase in power, a key that could withstand a brute-force guessing attack in 1975 could hardly be expected to withstand the same attack a quarter century later.
+
+7. In general, public key cryptography systems use hard-to-solve problems as the basis of the algorithm. The most predominant algorithm today for public key cryptography is rsa, based on the prime factors of very large integers.
+
+8. Regardless of the mathematical theory behind an algorithm, the best algorithms are those that are well-known and well-documented because they are also well-tested and well-studied.
+
+9. Secret key cryptography methods employ a single key for both encryption and decryption.
+
+10. A block cipher is so-called because the scheme encrypts one block of data at a time using the same key on each block.
