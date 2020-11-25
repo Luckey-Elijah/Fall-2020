@@ -1,225 +1,279 @@
+<!DOCTYPE html>
+
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TODO List</title>
-
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,700" rel="stylesheet" />
     <style>
-        /* Basic Style */
-        body {
-            background: #fff;
-            color: #333;
-            font-family: Lato, sans-serif;
+        /* variables */
+        :root {
+            --font-color: #2d3436;
+            --body-bg-color: #f7f1e3;
+            --container-bg-color: #55efc4;
+            --todo-bg-color: #00b894;
+            --done-bg-color: #2ed573;
+            --svg-normal-color: #2d3436;
+            --svg-hover-color: #0984e3;
+            --svg-complete-color: #0984e3;
+            --svg-remove-color: #d63031;
+            --svg-remove-hover-color: #ff4757;
         }
 
-        .container {
-            display: block;
-            width: 400px;
-            margin: 100px auto 0;
-        }
-
-        ul {
-            margin: 0;
+        * {
+            font-family: 'Josefin Sans',
+                sans-serif;
             padding: 0;
-        }
-
-        li * {
-            float: left;
-        }
-
-        li,
-        h3 {
-            clear: both;
-            list-style: none;
-        }
-
-        input,
-        button {
-            outline: none;
-        }
-
-        button {
-            background: none;
-            border: 0px;
-            color: #888;
-            font-size: 15px;
-            width: 60px;
-            margin: 10px 0 0;
-            font-family: Lato, sans-serif;
-            cursor: pointer;
-        }
-
-        button:hover {
-            color: #333;
-        }
-
-        /* HEADINGS */
-        h3,
-        label[for='add-todo-item'] {
-            color: #333;
-            font-weight: 700;
-            font-size: 15px;
-            border-bottom: 2px solid #333;
-            padding: 30px 0 10px;
             margin: 0;
-            text-transform: uppercase;
+            color: var(--font-color);
         }
 
-        input[type="text"] {
-            margin: 0;
-            font-size: 18px;
-            line-height: 18px;
-            height: 18px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            background: #fff;
-            border-radius: 6px;
-            font-family: Lato, sans-serif;
-            color: #888;
+        body {
+            background-color: var(--body-bg-color);
+            display: flex;
+            justify-content: center;
         }
 
-        input[type="text"]:focus {
-            color: #333;
+        #container {
+            background-color: var(--container-bg-color);
+            padding: 2%;
+            min-height: 30vh;
+            min-width: 30vw;
+            width: auto;
+            height: auto;
+            margin-top: 10vh;
+            border-radius: 5%;
         }
 
-        /* NEW TASK */
-        label[for='add-todo-item'] {
+        h2 {
+            margin-bottom: 40px;
+            margin-top: 40px;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: "";
+            border-bottom: 5px solid black;
             display: block;
-            margin: 0 0 20px;
+            width: auto;
         }
 
-        input#add-todo-item {
-            float: left;
-            width: 318px;
+        header {
+            display: flex;
+            justify-content: space-between;
         }
 
-        p>button:hover {
-            color: #000;
+        header input {
+            min-height: 40px;
+            width: 100%;
+            border: none;
+            padding-left: 5%;
+            background-color: var(--body-bg-color);
         }
 
-        /* Task list */
+        header button {
+            min-width: 40px;
+            background: none;
+            border: none;
+            font-size: 2rem;
+        }
+
         li {
-            overflow: hidden;
-            padding: 20px 0;
-            border-bottom: 1px solid #eee;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            background-color: var(--todo-bg-color);
+            padding: 2%;
+            box-sizing: border-box;
+            border-radius: 10px;
+            margin-bottom: 20px;
         }
 
-        li>input[type="checkbox"] {
-            margin: 0 10px;
-            position: relative;
-            top: 15px;
+        li .buttons {
+            min-width: 100px;
+            margin-left: auto;
+            display: inline;
         }
 
-        li>label {
-            font-size: 18px;
-            line-height: 40px;
-            width: 237px;
-            padding: 0 0 0 11px;
+        li .buttons button {
+            background: none;
+            min-width: 40px;
+            border: none;
+            font-size: 2rem;
         }
 
-        /* COMPLETED */
-        #completed-todo label {
-            text-decoration: line-through;
-            color: #888;
+        /* apply a different style to the completed tasks */
+
+        .completed li {
+            background-color: var(--done-bg-color);
+        }
+
+        .completed .complete svg path {
+            fill: var(--svg-complete-color);
+        }
+
+        /* STYLE SVGS */
+        svg {
+            max-width: 25px;
+        }
+
+        /* define the normal color */
+        svg path {
+            fill: var(--svg-normal-color);
+        }
+
+        /* change the color when we hover the icons*/
+        button:hover svg path {
+            fill: var(--svg-hover-color);
+        }
+
+        /* make the remove icon red*/
+        .remove svg path {
+            fill: var(--svg-remove-color);
+        }
+
+        /* make the remove icon a different color on hover */
+        .remove:hover svg path {
+            fill: var(--svg-remove-hover-color);
         }
     </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Add button
+            let addbutton = document.querySelector("#add");
+
+            // Input field for new item
+            let textField = document.querySelector("#text-field");
+
+            // SVG Icon for the buttons
+            let removeSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M0 84V56c0-13.3 10.7-24 24-24h112l9.4-18.7c4-8.2 12.3-13.3 21.4-13.3h114.3c9.1 0 17.4 5.1 21.5 13.3L312 32h112c13.3 0 24 10.7 24 24v28c0 6.6-5.4 12-12 12H12C5.4 96 0 90.6 0 84zm416 56v324c0 26.5-21.5 48-48 48H80c-26.5 0-48-21.5-48-48V140c0-6.6 5.4-12 12-12h360c6.6 0 12 5.4 12 12zm-272 68c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208zm96 0c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208zm96 0c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208z"/></svg>`;
+            let completeSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>`;
+
+            // User pressed button
+            addbutton.addEventListener("click", function () {
+                let newItem = document.getElementById("text-field").value;
+
+                // Ensures the item is not empty
+                if (newItem) {
+                    // Handle the new item
+                    addItemTodo(newItem);
+
+                    // Clear te field when done.
+                    document.getElementById("text-field").value = "";
+                }
+            });
+
+
+            // User pressed enter on keyboard
+            textField.addEventListener("keypress", function (k) {
+                if (13 === k.keyCode) {
+                    let newItem = document.getElementById("text-field").value;
+
+                    // Ensures the item is not empty
+                    if (newItem) {
+                        // Handle the new item
+                        addItemTodo(newItem);
+
+                        // Clear te field when done.
+                        document.getElementById("text-field").value = "";
+                    }
+
+                }
+            });
+
+            function addItemTodo(text) {
+                // get the 'ul'
+                let list = document.getElementById("todo");
+
+                // create a 'li'
+                let item = document.createElement('li');
+
+                // update our new text
+                item.innerText = text;
+
+                // CREATE the BUTTONS
+                let buttons = document.createElement('div');
+                buttons.classList.add("buttons");
+
+                // REMOVE Button
+                let remove = document.createElement('button');
+                remove.classList.add('remove');
+                remove.innerHTML = removeSVG;
+                remove.addEventListener("click", removeItem);
+
+                // COMPLETE Button
+                let complete = document.createElement('button');
+                complete.classList.add('complete');
+                complete.innerHTML = completeSVG;
+                complete.addEventListener("click", completeItem);
+
+                // Append the buttons/items to the list.
+                buttons.appendChild(remove);
+                buttons.appendChild(complete);
+                item.appendChild(buttons);
+
+                list.insertBefore(item, list.childNodes[0]);
+            }
+
+            function completeItem() {
+                let item = this.parentNode.parentNode;
+                let parent = this.parentNode;
+                let id = parent.id;
+
+                let target = (id === "todo") ?
+                    document.getElementById("completed")
+                    : document.getElementById("todo");
+
+                parent.removeChild(item);
+
+                target.insertBefore(item, target.childNodes[0]);
+            }
+
+            function removeItem() {
+                let item = this.parentNode.parentNode;
+                let parent = this.parentNode;
+                parent.removeChild(item);
+            }
+        });
+    </script>
 </head>
 
 <body>
+    <div>
+        <header>
+            <input type="text" placeholder="Type your TODO here.." id="text-field" />
+            <button id="add">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                    <path
+                        d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z">
+                    </path>
+                </svg>
+            </button>
+        </header>
 
-    <script>
-        // Globally available variables. These can be used between methods.
-        var todoInput = document.getElementById("add-todo-item");
-        var addButton = document.getElementById("button")[0];
-        var todoListHolder = document.getElementById("todo-list");
-        var completedTodoHolder = document.getElementById("completed-todo");
-
-        // New TODO list item
-        var createNewTodoListItem = function (todoString) {
-            var listItem = document.createElement("li");
-            var checkbox = document.createElement("input");
-            var label = document.createElement("label");
-
-            label.innerHTML = todoString;
-
-            checkbox.type = "checkbox";
-
-            listItem.appendChild(checkbox);
-            listItem.appendChild(label);
-
-            return listItem;
-        }
-
-        // This is called when the add button is pressed.
-        var addTask = function () {
-            // Grab the value from the input (declared globally) and generate the element
-            var listItem = createNewTodoListItem(todoInput.value);
-
-            // Append the element to the todo list (declared globally)
-            todoListHolder.appendChild(listItem);
-
-            bindTodoItemToCheckbox(listItem, markTodoComplete)
-
-            // Clean up
-            todoInput.value = "";
-        }
-
-
-        var markTodoComplete = function () {
-            var todoItem = this.parentNode;
-            completedTodoHolder.appendChild(todoItem);
-            bindTodoItemToCheckbox(listItem, todo)
-        }
-        var markTodoIncomplete = function () { }
-
-        var bindTodoItemToCheckbox = function (todoListitem, checkbox) {
-            var checkbox = todoListitem.querySelector("input[type=checkbox");
-            checkbox.onchange = checkbox.checkboxEventHandler
-        }
-
-    </script>
-
-    <div class="container">
-        <!-- ADD ITEM -->
-        <p>
-            <label for="add-todo-item">Add Item</label>
-            <input id="add-todo-item" type="text">
-            <button>Add</button>
-        </p>
-
-        <!-- TODO LIST -->
-        <h3>Todo</h3>
-        <ul id="todo-list">
-            <li>
-                <input type="checkbox">
-                <label>Complete HW #5</label>
+        <h2>TODO</h2>
+        <ul class="todo" id="todo">
+            <!-- The format of the buttons look like this -->
+            <li>ITEM 1
+                <span class="buttons">
+                    <button class="remove"></button>
+                    <button class="complete"></button>
+                </span>
             </li>
         </ul>
 
-        <!-- DONE LIST -->
-        <h3>Done</h3>
-        <ul id="completed-todo">
-            <li>
-                <input type="checkbox" checked>
-                <label>Complete HW #4</label>
-            </li>
-            <li>
-                <input type="checkbox" checked>
-                <label>Complete HW #3</label>
-            </li>
-            <li>
-                <input type="checkbox" checked>
-                <label>Complete HW #2</label>
-            </li>
-            <li>
-                <input type="checkbox" checked>
-                <label>Complete HW #1</label>
+        <h2>COMPLETED</h2>
+        <ul class="completed" id="completed">
+            <li>ITEM 1
+                <span class="buttons">
+                    <button class="remove"></button>
+                    <button class="complete"></button>
+                </span>
             </li>
         </ul>
     </div>
-
-
 </body>
 
 </html>
